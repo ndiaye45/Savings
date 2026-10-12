@@ -1,0 +1,24 @@
+```gitignore
+# Secrets et variables d'environnement
+.env
+.env.*
+!.env.example
+
+# Frontend
+node_modules/
+dist/
+
+# Backend Java / Maven
+target/
+
+# IDE
+.idea/
+*.iml
+
+# Fichiers divers
+backup.sql
+*.log
+
+# Ancien dépôt Git du backend
+savings-backend/.git-backup/
+```
