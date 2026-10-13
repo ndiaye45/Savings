@@ -1,44 +1,46 @@
-<div align="center">
+# 💰 Savings API
 
-# 💰 Savings
+API REST de gestion financière personnelle développée avec Java et Spring Boot.
 
-Application de gestion financière personnelle permettant aux utilisateurs de suivre leurs dépenses et leurs objectifs d'épargne.
-
-API REST sécurisée développée avec Spring Boot, authentification JWT, persistance PostgreSQL et déploiement via Docker.
-
-</div>
+Ce projet permet aux utilisateurs de gérer leurs dépenses, suivre leurs objectifs d'épargne et consulter des statistiques financières à travers une API sécurisée utilisant JWT et Spring Security.
 
 ---
 
 ## ✨ Fonctionnalités
 
-### Authentification et sécurité
+### 🔐 Authentification et sécurité
 
 - Inscription utilisateur
-- Authentification via JWT
+- Authentification JWT
 - Hachage des mots de passe avec BCrypt
 - Gestion des rôles USER et ADMIN
-- Protection des endpoints avec Spring Security
+- Protection des routes avec Spring Security
+- Contrôle d'accès basé sur l'utilisateur connecté
 
-### Gestion des dépenses
+### 💸 Gestion des dépenses
 
 - Création de dépenses
 - Modification de dépenses
 - Suppression de dépenses
 - Consultation de l'historique des dépenses
 
-### Objectifs d'épargne
+### 🎯 Objectifs d'épargne
 
 - Création d'objectifs financiers
-- Suivi de la progression
-- Dépôts sur un objectif
 - Gestion des échéances
+- Dépôt d'argent sur un objectif
+- Suivi en temps réel de la progression
 
-### API REST
+### 📊 Statistiques financières
 
-- Documentation interactive avec Swagger/OpenAPI
-- Validation des données entrantes
-- Gestion centralisée des erreurs
+- Total des dépenses enregistrées
+- Montant total épargné
+- Nombre de dépenses
+- Nombre d'objectifs d'épargne
+
+### 📚 Documentation API
+
+- Documentation interactive avec Swagger / OpenAPI
 
 ---
 
@@ -46,6 +48,8 @@ API REST sécurisée développée avec Spring Boot, authentification JWT, persis
 
 ### Prérequis
 
+- Java 17+
+- Maven
 - Docker
 - Docker Compose
 
@@ -62,44 +66,46 @@ cd Savings
 docker compose up --build
 ```
 
-### Accès aux services
+### Services disponibles
 
 | Service | URL |
 |----------|----------|
 | API | http://localhost:8080 |
-| Swagger UI | http://localhost:8080/swagger-ui.html |
+| Swagger | http://localhost:8080/swagger-ui.html |
 | Frontend | http://localhost:3000 |
 
 ---
 
 ## 🏗️ Architecture
 
+L'application suit une architecture en couches afin de garantir la séparation des responsabilités.
+
 ```text
-Client
-   │
-   ▼
-React Frontend
-   │
-   ▼
-Spring Boot REST API
-   │
-   ▼
-Service Layer
-   │
-   ▼
-Repository Layer
-   │
-   ▼
+Controller
+    │
+    ▼
+Service
+    │
+    ▼
+Repository
+    │
+    ▼
 PostgreSQL
 ```
 
-Le backend suit une architecture en couches favorisant la séparation des responsabilités :
+### Structure backend
 
-- Controllers : exposition des endpoints REST
-- Services : logique métier
-- Repositories : accès aux données
-- Security : authentification et autorisation
-- Entities : modèle de données
+```text
+savings-backend
+├── controller
+├── service
+├── repository
+├── entity
+├── dto
+├── security
+├── config
+└── exception
+```
 
 ---
 
@@ -108,8 +114,8 @@ Le backend suit une architecture en couches favorisant la séparation des respon
 ### Authentification
 
 ```http
-POST /auth/login
 POST /users
+POST /auth/login
 ```
 
 ### Utilisateurs
@@ -118,6 +124,7 @@ POST /users
 GET    /users
 GET    /users/{id}
 PUT    /users/{id}
+DELETE /users/{id}
 ```
 
 ### Dépenses
@@ -125,6 +132,7 @@ PUT    /users/{id}
 ```http
 GET    /expenses
 POST   /expenses
+GET    /expenses/{id}
 PUT    /expenses/{id}
 DELETE /expenses/{id}
 ```
@@ -134,11 +142,17 @@ DELETE /expenses/{id}
 ```http
 GET    /savings-goals
 POST   /savings-goals
+GET    /savings-goals/{id}
 PUT    /savings-goals/{id}
 DELETE /savings-goals/{id}
-
 POST   /savings-goals/{id}/deposit
 GET    /savings-goals/{id}/progress
+```
+
+### Statistiques
+
+```http
+GET /statistics
 ```
 
 ---
@@ -147,17 +161,39 @@ GET    /savings-goals/{id}/progress
 
 Le projet implémente plusieurs mécanismes de sécurité :
 
-- Authentification JWT
+- Authentification basée sur JWT
 - Spring Security
-- BCrypt pour le hachage des mots de passe
-- Contrôle d'accès basé sur les rôles
-- Validation des données avec Bean Validation
+- Hachage des mots de passe avec BCrypt
+- Contrôle d'accès par rôle
+- Validation des données entrantes
 - Gestion centralisée des exceptions
-- Configuration sécurisée via variables d'environnement
+- Protection des ressources utilisateur
 
 ---
 
-## 🧰 Stack Technique
+## ✅ Tests
+
+Le projet comprend des tests unitaires réalisés avec :
+
+- JUnit 5
+- Mockito
+
+Services testés :
+
+- UserService
+- ExpenseService
+- SavingsGoalService
+- StatisticsService
+
+Exécution des tests :
+
+```bash
+mvn test
+```
+
+---
+
+## 🧰 Technologies utilisées
 
 ### Backend
 
@@ -171,13 +207,38 @@ Le projet implémente plusieurs mécanismes de sécurité :
 
 ### Base de données
 
-- PostgreSQL 16
+- PostgreSQL
+
+### Documentation
+
+- Swagger / OpenAPI
+
+### Tests
+
+- JUnit 5
+- Mockito
 
 ### Outils
 
+- Git
+- GitHub
 - Docker
 - Docker Compose
-- Swagger / OpenAPI
+
+---
+
+## 🧠 Compétences développées
+
+Ce projet m'a permis de travailler sur :
+
+- La conception d'API REST sécurisées
+- L'authentification et l'autorisation avec JWT
+- La gestion des rôles et des permissions
+- La persistance de données avec JPA/Hibernate
+- La modélisation de bases de données relationnelles
+- Les tests unitaires avec JUnit et Mockito
+- La conteneurisation avec Docker
+- La documentation d'API avec Swagger
 
 ---
 
@@ -187,40 +248,18 @@ Le projet implémente plusieurs mécanismes de sécurité :
 Savings
 ├── docker-compose.yml
 ├── savings-backend
-│   ├── controller
-│   ├── service
-│   ├── repository
-│   ├── entity
-│   ├── security
-│   ├── exception
-│   └── config
 └── savings-frontend
 ```
 
 ---
 
-## 🧠 Compétences mises en œuvre
+## 🗺️ Évolutions possibles
 
-Ce projet m'a permis de développer mes compétences en :
-
-- Développement backend avec Spring Boot
-- Conception d'API REST sécurisées
-- Authentification et autorisation avec JWT
-- Modélisation de données relationnelles avec JPA/Hibernate
-- Conteneurisation d'applications avec Docker
-- Gestion des erreurs et validation des données
-- Architecture logicielle en couches
-
----
-
-## 🗺️ Améliorations futures
-
-- Tests unitaires et d'intégration
-- CI/CD avec GitHub Actions
+- Pipeline CI/CD avec GitHub Actions
 - Pagination et filtrage des dépenses
 - Export CSV des transactions
-- Déploiement cloud avec HTTPS
-- Notifications et alertes financières
+- Notifications financières
+- Déploiement cloud (AWS, Azure, Render)
 
 ---
 
@@ -228,7 +267,8 @@ Ce projet m'a permis de développer mes compétences en :
 
 **Youssou Ndiaye**
 
-Étudiant en Master Informatique, spécialisé dans le développement backend Java et Spring Boot.
+Étudiant en Master 1 Informatique  
+Parcours Applications Réparties, Intelligence Artificielle et Sécurité  
+Université d'Orléans
 
-- GitHub : https://github.com/ndiaye45
-`
+GitHub : https://github.com/ndiaye45
