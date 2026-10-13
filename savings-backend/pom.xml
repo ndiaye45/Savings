@@ -76,6 +76,14 @@
         <!-- Tests                 -->
         <!-- ==================== -->
 
+        <!-- Spring Boot tests -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- JPA tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
