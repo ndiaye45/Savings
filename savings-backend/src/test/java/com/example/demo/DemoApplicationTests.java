@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
 @Import(TestcontainersConfiguration.class)
-@SpringBootTest
+@SpringBootTest(properties = "jwt.secret=cle-de-test-uniquement-au-moins-32-caracteres-0123456789")
 class DemoApplicationTests {
 
     @Test

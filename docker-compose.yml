@@ -19,7 +19,7 @@ services:
       postgres:
         condition: service_healthy        # l'API attend que la base soit prête
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-mydatabase}
+      SPRING_DATAS  OURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-mydatabase}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-myuser}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?Définir POSTGRES_PASSWORD dans .env}
